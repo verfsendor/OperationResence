@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/OperationResence.iml" filepath="$PROJECT_DIR$/OperationResence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OperationResencer/OperationResencer.iml" filepath="$PROJECT_DIR$/OperationResencer/OperationResencer.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/operationresencer/operationresencer.iml" filepath="$PROJECT_DIR$/operationresencer/operationresencer.iml" />
     </modules>
   </component>
 </project>
