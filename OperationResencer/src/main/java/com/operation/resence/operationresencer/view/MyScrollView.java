@@ -29,13 +29,6 @@ public class MyScrollView extends ScrollView {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        TouchEventBean eventBean = new TouchEventBean();
-        eventBean.setRawX(ev.getRawX());
-        eventBean.setRawY(ev.getRawY());
-        eventBean.setTime(System.currentTimeMillis());
-        eventBean.setAction(ev.getAction());
-        eventBean.setPageName("" + getTag());
-        TestManager.addEvent(eventBean);
         Log.v("verf",getTag() + " MyScrollView " + ev.getRawX()  + " " + ev.getRawY() + " " + Util.getActionTxt(ev.getAction()));
         return super.onTouchEvent(ev);
     }

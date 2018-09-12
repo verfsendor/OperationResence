@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.txt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, fifthActivity.class));
+                startActivity(new Intent(MainActivity.this, FourthActivity.class));
             }
         });
     }

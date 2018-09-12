@@ -1,9 +1,7 @@
 package com.operation.resence.operationresencer;
-
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.KeyEvent;
 import android.view.KeyboardShortcutGroup;
@@ -12,16 +10,11 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SearchEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import com.operation.resence.operationresencer.bean.KeyEventBean;
-import com.operation.resence.operationresencer.bean.TouchEventBean;
-import com.operation.resence.operationresencer.utils.Constants;
 import com.operation.resence.operationresencer.utils.TestManager;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -10,7 +10,7 @@ import android.view.View;
 public class AttachListener implements View.OnAttachStateChangeListener {
     @Override
     public void onViewAttachedToWindow(View v) {
-        ViewManager.getEvent("",v);
+        ViewManager.travelView("",v);
     }
 
     @Override

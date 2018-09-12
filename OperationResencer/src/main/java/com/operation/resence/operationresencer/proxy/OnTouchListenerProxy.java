@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.operation.resence.operationresencer.bean.TouchEventBean;
 import com.operation.resence.operationresencer.utils.TestManager;
+import com.operation.resence.operationresencer.utils.Util;
 
 /**
  * Created by xuzhendong on 2018/9/11.
@@ -20,8 +21,9 @@ public class OnTouchListenerProxy implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        Log.v("verf","hook view ontouch ");
+        Log.v("verf","ontouch事件 " + v.getTag() + " " + event.getRawX() + " " + event.getRawY() + " " + Util.getActionTxt(event.getAction()));
         if(TestManager.test){
+            Log.v("verf","添加 ontouch事件 ");
             TouchEventBean eventBean = new TouchEventBean();
             eventBean.setRawX(event.getRawX());
             eventBean.setRawY(event.getRawY());
@@ -30,6 +32,9 @@ public class OnTouchListenerProxy implements View.OnTouchListener {
             eventBean.setPageName("" + v.getTag());
             TestManager.addEvent(eventBean);
         }
-        return object.onTouch(v,event);
+        if(object  != null){
+            return object.onTouch(v,event);
+        }
+        return false;
     }
 }

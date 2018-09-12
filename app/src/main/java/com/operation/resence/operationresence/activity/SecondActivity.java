@@ -25,7 +25,7 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                showPopUpWindow();
-                startActivity(new Intent(SecondActivity.this, ThirdActivity.class));
+                startActivity(new Intent(SecondActivity.this, MainActivity.class));
             }
         });
 

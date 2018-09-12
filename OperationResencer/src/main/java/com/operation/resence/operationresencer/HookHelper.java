@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.operation.resence.operationresencer.proxy.InstrumentationProxy;
+import com.operation.resence.operationresencer.proxy.OnClickListenerProxy;
 import com.operation.resence.operationresencer.proxy.OnKeyListenerProxy;
 import com.operation.resence.operationresencer.proxy.OnTouchListenerProxy;
 
@@ -43,33 +44,7 @@ public class HookHelper {
         mInstrumentationField.set(currentActivityThread, evilInstrumentation);
     }
 
-    public static void hookOnTouchEventListener(View view){
-            try {
-                Class viewClazz = Class.forName("android.view.View");
-                //事件监听器都是这个实例保存的
-                Method listenerInfoMethod = viewClazz.getDeclaredMethod("getListenerInfo");
-                if (!listenerInfoMethod.isAccessible()) {
-                    listenerInfoMethod.setAccessible(true);
-                }
-                Object listenerInfoObj = listenerInfoMethod.invoke(view);
 
-                Class listenerInfoClazz = Class.forName("android.view.View$ListenerInfo");
-
-                Field onTouchListenerField = listenerInfoClazz.getDeclaredField("mOnTouchListener");
-
-                if (!onTouchListenerField.isAccessible()) {
-                    onTouchListenerField.setAccessible(true);
-                }
-                View.OnTouchListener mOnTouchListener = (View.OnTouchListener) onTouchListenerField.get(listenerInfoObj);
-                //自定义代理事件监听器
-                Log.v("verf","montouch == null " +  (mOnTouchListener == null ? true : false));
-                View.OnTouchListener onTouchListenerProxy = new OnTouchListenerProxy(mOnTouchListener);
-                //更换
-                onTouchListenerField.set(listenerInfoObj, onTouchListenerProxy);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-    }
 
     public static void hookOnKeyEventListener(View view){
         try {
@@ -98,6 +73,58 @@ public class HookHelper {
         }
     }
 
+    public static void hookViewClickListener(View view) {
+        try {
+            Class viewClazz = Class.forName("android.view.View");
+            //事件监听器都是这个实例保存的
+            Method listenerInfoMethod = viewClazz.getDeclaredMethod("getListenerInfo");
+            if (!listenerInfoMethod.isAccessible()) {
+                listenerInfoMethod.setAccessible(true);
+            }
+            Object listenerInfoObj = listenerInfoMethod.invoke(view);
+
+            Class listenerInfoClazz = Class.forName("android.view.View$ListenerInfo");
+
+            Field onClickListenerField = listenerInfoClazz.getDeclaredField("mOnClickListener");
+
+            if (!onClickListenerField.isAccessible()) {
+                onClickListenerField.setAccessible(true);
+            }
+            View.OnClickListener mOnClickListener = (View.OnClickListener) onClickListenerField.get(listenerInfoObj);
+            //自定义代理事件监听器
+            View.OnClickListener onClickListenerProxy = new OnClickListenerProxy(mOnClickListener);
+            //更换
+            onClickListenerField.set(listenerInfoObj, onClickListenerProxy);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void hookOnTouchEventListener(View view){
+        try {
+            Class viewClazz = Class.forName("android.view.View");
+            //事件监听器都是这个实例保存的
+            Method listenerInfoMethod = viewClazz.getDeclaredMethod("getListenerInfo");
+            if (!listenerInfoMethod.isAccessible()) {
+                listenerInfoMethod.setAccessible(true);
+            }
+            Object listenerInfoObj = listenerInfoMethod.invoke(view);
+
+            Class listenerInfoClazz = Class.forName("android.view.View$ListenerInfo");
+
+            Field onTouchListenerField = listenerInfoClazz.getDeclaredField("mOnTouchListener");
+
+            if (!onTouchListenerField.isAccessible()) {
+                onTouchListenerField.setAccessible(true);
+            }
+            View.OnTouchListener mOnTouchListener = (View.OnTouchListener) onTouchListenerField.get(listenerInfoObj);
+            //自定义代理事件监听器
+            View.OnTouchListener onTouchListenerProxy = new OnTouchListenerProxy(mOnTouchListener);
+            //更换
+            onTouchListenerField.set(listenerInfoObj, onTouchListenerProxy);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void hookFragment(FragmentManager manager){
         ViewGroup viewGroup = null ;

@@ -24,10 +24,10 @@ public class ThirdActivity extends AppCompatActivity {
         findViewById(R.id.txt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ThirdActivity.this, FourthActivity.class));
+                startActivity(new Intent(ThirdActivity.this, SecondActivity.class));
             }
         });
 
-        FragmentUtils.replaceFragmentWithAnim(getSupportFragmentManager(), FirstFragment.class, R.id.frame, null);
+//        FragmentUtils.replaceFragmentWithAnim(getSupportFragmentManager(), FirstFragment.class, R.id.frame, null);
     }
 }

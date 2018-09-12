@@ -17,6 +17,10 @@ public class OnKeyListenerProxy implements View.OnKeyListener {
 
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
-        return object.onKey(v, keyCode, event);
+
+        if(object != null){
+           return object.onKey(v, keyCode, event);
+        }
+        return true;
     }
 }

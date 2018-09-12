@@ -24,19 +24,15 @@ import java.util.ArrayList;
  */
 
 public class TestManager {
-    public static boolean test = true;
-    public static int i = 0;
-    public static ArrayList<BaseEvent> events = new ArrayList<>();
-    public static long lasttime = -1;
+    public static boolean test = true; //判断记录是否开启，为true时才会记录点击值
+    public static ArrayList<BaseEvent> events = new ArrayList<>();//记录点击过程的事件
 
     public static void addEvent(BaseEvent event){
-        if(lasttime > 0) {
-            lasttime = event.getTime();
-        }
         if(events.size() < 500) {
             events.add(event);
         }
     }
+
     public static void startTest(){
        new TestThread().start();
     }

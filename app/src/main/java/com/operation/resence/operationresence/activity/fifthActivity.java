@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.operation.resence.operationresence.R;
@@ -21,6 +23,13 @@ public class fifthActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(fifthActivity.this, MainActivity.class));
+            }
+        });
+
+        findViewById(R.id.txt).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
             }
         });
     }

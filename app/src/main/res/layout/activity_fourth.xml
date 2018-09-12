@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="30dp"
-        android:text="第四个"
+        android:text="四页---"
         android:gravity="center"/>
 
 </LinearLayout>

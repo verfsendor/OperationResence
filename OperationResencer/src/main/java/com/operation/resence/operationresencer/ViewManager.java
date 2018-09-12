@@ -1,6 +1,6 @@
 package com.operation.resence.operationresencer;
 
-import android.os.Message;
+import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -10,12 +10,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.operation.resence.operationresencer.bean.BaseEvent;
-
-import java.util.ArrayList;
-import java.util.EventListener;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
+import com.operation.resence.operationresencer.bean.EditTextEventBean;
+import com.operation.resence.operationresencer.bean.TouchEventBean;
+import com.operation.resence.operationresencer.utils.TestManager;
 
 /**
  * Created by xuzhendong on 2018/9/10.
@@ -27,7 +24,7 @@ public class ViewManager {
      * 遍历view树
      * @param view
      */
-    public  static  void getEvent(String page, final View view){
+    public  static  void travelView(String page, final View view){
         if(view instanceof ViewGroup){
             for(int i = 0; i < ((ViewGroup) view).getChildCount(); i ++){
                 View childView = ((ViewGroup) view).getChildAt(i);
@@ -35,15 +32,14 @@ public class ViewManager {
                     view.setTag(page + "#");
                 }
                 childView.setTag(view.getTag() + "-" + i);
-                getEvent(page, childView);
+                travelView(page, childView);
             }
             //子view数目为空，添加监听，当加入新子view时，对view进行遍历
             if(((ViewGroup) view).getChildCount() == 0) {
                 view.addOnAttachStateChangeListener(new AttachListener());
             }
-//            HookHelper.hookOnTouchEventListener(view);
+            HookHelper.hookOnTouchEventListener(view);
         }else {
-//            HookHelper.hookOnTouchEventListener(view);
             if(view instanceof EditText){
                 ((EditText) view).addTextChangedListener(new TextWatcher() {
                     @Override
@@ -58,21 +54,32 @@ public class ViewManager {
 
                     @Override
                     public void afterTextChanged(Editable s) {
+                        if(TestManager.test){
+                            Log.v("verf","添加 ontouch事件 ");
+                            EditTextEventBean eventBean = new EditTextEventBean();
+                            eventBean.setTime(SystemClock.uptimeMillis());
+                            eventBean.setPageName("" + view.getTag());
+                            eventBean.setTxt(((EditText) view).getText().toString());
+                            TestManager.addEvent(eventBean);
+                        }
 //                        Log.v("verf","view id " + view.getTag() + " " + ((EditText) view).getText());
                     }
                 });
-            }else if(view instanceof TextView){
+            }else{
+                HookHelper.hookOnTouchEventListener(view);
+                if(view instanceof TextView){
 //                Log.v("verf","view id " + view.getTag() + " " + ((TextView) view).getText());
+                }
             }
         }
     }
 
 
     /**
-     * 遍历view树,设置事件
+     * 遍历view树,设置触屏事件
      * @param view
      */
-    public  static  void setEventToView(final View view, MotionEvent motionEvent, String path, String tag){
+    public  static  void setTouchEventToView(final View view, MotionEvent motionEvent, String path, String tag){
         if(tag.equals(path)){
             view.onTouchEvent(motionEvent);
         }
@@ -82,7 +89,35 @@ public class ViewManager {
                 View childView = ((ViewGroup) view).getChildAt(i);
                 txt = tag + "-" + i;
                 if(txt.length() <= path.length() && path.substring(0, txt.length()).equals(txt)){
-                    setEventToView(childView, motionEvent, path, tag + "-" + i);
+                    setTouchEventToView(childView, motionEvent, path, tag + "-" + i);
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     * 遍历view树,设置文本
+     * @param view
+     */
+    public  static  void setTextEventToView(final View view, final String txtString, String path, String tag){
+        if(tag.equals(path) && view instanceof EditText){
+            Log.v("kkk","settext0");
+            view.post(new Runnable() {
+                @Override
+                public void run() {
+                    Log.v("kkk","settext0000");
+                    ((EditText) view).setText(txtString);
+                }
+            });
+        }
+        if(view instanceof ViewGroup){
+            String txt = "";
+            for(int i = 0; i < ((ViewGroup) view).getChildCount(); i ++){
+                View childView = ((ViewGroup) view).getChildAt(i);
+                txt = tag + "-" + i;
+                if(txt.length() <= path.length() && path.substring(0, txt.length()).equals(txt)){
+                    setTextEventToView(childView, txtString, path, tag + "-" + i);
                     break;
                 }
             }

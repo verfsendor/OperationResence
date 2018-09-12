@@ -5,8 +5,6 @@ package com.operation.resence.operationresencer.utils;
  */
 
 public class Util {
-    public static float SCREEN_WIDTH;
-    public static float SCREEN_HEIGHT;
 
     public static String getActionTxt(int action){
         String txt = "";
