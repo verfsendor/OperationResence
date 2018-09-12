@@ -28,6 +28,30 @@ public class SecondActivity extends AppCompatActivity {
                 startActivity(new Intent(SecondActivity.this, ThirdActivity.class));
             }
         });
+
+        findViewById(R.id.txt1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                showPopUpWindow();
+                startActivity(new Intent(SecondActivity.this, MainActivity.class));
+            }
+        });
+
+        findViewById(R.id.txt2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                showPopUpWindow();
+                startActivity(new Intent(SecondActivity.this, FourthActivity.class));
+            }
+        });
+
+        findViewById(R.id.txt3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                showPopUpWindow();
+                startActivity(new Intent(SecondActivity.this, ThirdActivity.class));
+            }
+        });
     }
 
     public void showPopUpWindow(){

@@ -1,54 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.operation.resence.operationresence.activity.MainActivity">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#765434"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#333333"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/sss"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="1"
-                android:gravity="center"
-                android:textSize="30dp"/>
-            <TextView
-                android:id="@+id/ddd"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="2"
-                android:gravity="center"
-                android:textSize="30dp"/>
-            <TextView
-                android:id="@+id/fff"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3"
-                android:gravity="center"
-                android:textSize="30dp"/>
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
+        <!--<EditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:background="#765434"/>-->
+        <!--<EditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:background="#333333"/>-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical">-->
+            <!--<com.operation.resence.operationresencer.MyTextview-->
+                <!--android:id="@+id/sss"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:text="1"-->
+                <!--android:gravity="center"-->
+                <!--android:textSize="30dp"/>-->
+            <!--<com.operation.resence.operationresencer.MyTextview-->
+                <!--android:id="@+id/ddd"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:text="2"-->
+                <!--android:gravity="center"-->
+                <!--android:textSize="30dp"/>-->
+            <!--<com.operation.resence.operationresencer.MyTextview-->
+                <!--android:id="@+id/fff"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:text="3"-->
+                <!--android:gravity="center"-->
+                <!--android:textSize="30dp"/>-->
 
-        </LinearLayout>
-        <TextView
+        <!--</LinearLayout>-->
+        <com.operation.resence.operationresencer.MyTextview
             android:id="@+id/txt"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="sklsksgjksg"
+            android:layout_height="200dp"
+            android:text="上面一个"
             android:gravity="center"/>
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+
+    <com.operation.resence.operationresencer.MyTextview
+        android:id="@+id/clicktxt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="点击我"
+        android:gravity="center"/>
+    <!--</LinearLayout>-->
+</LinearLayout>

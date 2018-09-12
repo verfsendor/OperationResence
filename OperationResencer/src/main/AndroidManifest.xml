@@ -1,2 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.operation.resence.operationresencer" />
+    package="com.operation.resence.operationresencer">
+
+    <uses-permission android:name="android.permission.INJECT_EVENTS" />
+
+</manifest>
