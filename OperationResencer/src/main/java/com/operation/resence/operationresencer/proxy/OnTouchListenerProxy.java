@@ -14,16 +14,15 @@ import com.operation.resence.operationresencer.utils.Util;
 
 public class OnTouchListenerProxy implements View.OnTouchListener {
     private View.OnTouchListener object;
-
+    private int MIN_CLICK_DELAY_TIME = 500;
+    private long lastClickTime = 0;
     public OnTouchListenerProxy(View.OnTouchListener object) {
         this.object = object;
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        Log.v("verf","ontouch事件 " + v.getTag() + " " + event.getRawX() + " " + event.getRawY() + " " + Util.getActionTxt(event.getAction()));
         if(TestManager.test){
-            Log.v("verf","添加 ontouch事件 ");
             TouchEventBean eventBean = new TouchEventBean();
             eventBean.setRawX(event.getRawX());
             eventBean.setRawY(event.getRawY());
@@ -32,8 +31,12 @@ public class OnTouchListenerProxy implements View.OnTouchListener {
             eventBean.setPageName("" + v.getTag());
             TestManager.addEvent(eventBean);
         }
-        if(object  != null){
-            return object.onTouch(v,event);
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastClickTime > MIN_CLICK_DELAY_TIME) {
+            lastClickTime = currentTime;
+            if (object != null) {
+                return object.onTouch(v, event);
+            }
         }
         return false;
     }

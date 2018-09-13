@@ -28,7 +28,6 @@ public class FourthActivity extends AppCompatActivity {
         findViewById(R.id.txt).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Log.v("verf","fourth onTouch to");
                 return false;
             }
         });

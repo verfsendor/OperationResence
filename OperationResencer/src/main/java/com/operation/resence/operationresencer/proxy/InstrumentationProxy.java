@@ -72,29 +72,30 @@ public  class InstrumentationProxy extends Instrumentation {
         }
     }
 
-    /**
-     * 如果nowActivty持有该activity对象，只要activity进入了stop状态（hook 不到onfinsh())，就立即置空，避免造成内存泄漏
-     * @param activity
-     */
-    public void callActivityOnStop(Activity activity) {
-        try {
-            //记录当前正在显示的activity名称
-            if(Constants.nowActivityName != null &&
-                    activity.getClass().getSimpleName().equals(Constants.nowActivityName.getClass().getSimpleName())) {
-                Constants.nowActivityName = null;
-            }
-            if(activity.getWindow() != null) {
-                Method callActivityOnStop = Instrumentation.class.getDeclaredMethod("callActivityOnStop", Activity.class);
-                callActivityOnStop.setAccessible(true);
-                callActivityOnStop.invoke(mBase, activity);
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-    }
+//    /**
+//     * 如果nowActivty持有该activity对象，只要activity进入了Destroy状态（Instrumentation 找不到callActivityonfinsh()方法)，就立即置空，避免造成内存泄漏
+//     * @param activity
+//     */
+//    public void callActivityOnDestroy(Activity activity) {
+//        try {
+//            Log.v("verf","callActivityOnDestroy " + Constants.nowActivityName.getClass().getSimpleName());
+//            //记录当前正在显示的activity名称
+//            if(Constants.nowActivityName != null &&
+//                    activity.getClass().getSimpleName().equals(Constants.nowActivityName.getClass().getSimpleName())) {
+//                Constants.nowActivityName = null;
+//            }
+//            if(activity.getWindow() != null) {
+//                Method callActivityOnDestroy = Instrumentation.class.getDeclaredMethod("callActivityOnDestroy", Activity.class);
+//                callActivityOnDestroy.setAccessible(true);
+//                callActivityOnDestroy.invoke(mBase, activity);
+//            }
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        } catch (NoSuchMethodException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
 

@@ -8,6 +8,7 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.View;
 
 import com.operation.resence.operationresencer.R;
 import com.operation.resence.operationresencer.TestThread;
@@ -28,6 +29,9 @@ public class TestManager {
     public static ArrayList<BaseEvent> events = new ArrayList<>();//记录点击过程的事件
 
     public static void addEvent(BaseEvent event){
+        if(event instanceof TouchEventBean) {
+            Log.v("verf", "add " + event.getPageName() + " " + ((TouchEventBean) event).getRawX() + " "  + ((TouchEventBean) event).getRawY() + " " + ((TouchEventBean) event).getActionTxt() + " " + events.size() );
+        }
         if(events.size() < 500) {
             events.add(event);
         }

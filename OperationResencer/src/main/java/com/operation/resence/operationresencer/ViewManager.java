@@ -1,5 +1,6 @@
 package com.operation.resence.operationresencer;
 
+import android.app.Instrumentation;
 import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,12 +20,19 @@ import com.operation.resence.operationresencer.utils.TestManager;
  */
 
 public class ViewManager {
-
+    /**
+     * 保存上次派发事件的view和tag，如果和上次tag相同，直接传给view，节省时间，不再进行遍历查询
+     */
+     private static View lastView;
+     private static String lastPath;
+     private static String lastPage;
+     private static int sameEventNum;//用来判断相同目标view的事件个数
     /**
      * 遍历view树
      * @param view
      */
     public  static  void travelView(String page, final View view){
+        HookHelper.hookViewClickListener(view);
         if(view instanceof ViewGroup){
             for(int i = 0; i < ((ViewGroup) view).getChildCount(); i ++){
                 View childView = ((ViewGroup) view).getChildAt(i);
@@ -74,14 +82,38 @@ public class ViewManager {
         }
     }
 
-
     /**
-     * 遍历view树,设置触屏事件
-     * @param view
+     * 遍历view树传入触屏事件
+     * @param view  当前最顶层view
+     * @param motionEvent 事件
+     * @param page 当前所属页面的类名
+     * @param path 当前目标view的路径
+     * @param tag 当前已经遍历到的view路径，用于递归时的比较
      */
-    public  static  void setTouchEventToView(final View view, MotionEvent motionEvent, String path, String tag){
+    public  static  void setTouchEventToView(final View view, MotionEvent motionEvent,String page, String path, String tag){
+        if(path.equals(lastPath) && page.equals(lastPage)){
+            Log.v("verf","相同view  " + sameEventNum + " " + motionEvent.getAction());
+//            lastView.onTouchEvent(motionEvent);
+            onTouchView(lastView, motionEvent);
+            sameEventNum ++;
+            if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                if(sameEventNum < 10){
+                    Log.v("verf","触发点击 " + sameEventNum + " " + view.getTag());
+                    perfromClick(lastView);
+                }
+                Log.v("verf","抬起清零 ");
+                sameEventNum = 0;
+            }
+            return;
+        }
         if(tag.equals(path)){
-            view.onTouchEvent(motionEvent);
+            Log.v("verf","开始落下  " + sameEventNum + " " + motionEvent.getAction());
+            onTouchView(view, motionEvent);
+            lastView = view;
+            lastPath = path;
+            lastPage = page;
+            sameEventNum ++;
+            return;
         }
         if(view instanceof ViewGroup){
             String txt = "";
@@ -89,7 +121,7 @@ public class ViewManager {
                 View childView = ((ViewGroup) view).getChildAt(i);
                 txt = tag + "-" + i;
                 if(txt.length() <= path.length() && path.substring(0, txt.length()).equals(txt)){
-                    setTouchEventToView(childView, motionEvent, path, tag + "-" + i);
+                    setTouchEventToView(childView, motionEvent, page, path, tag + "-" + i);
                     break;
                 }
             }
@@ -124,5 +156,32 @@ public class ViewManager {
         }
     }
 
+
+    /**
+     * 一次复现完成后释放持有的view对象
+     */
+    public static void recycle(){
+        lastView = null;
+        lastPath = "";
+        lastPage = "";
+    }
+
+    private static void perfromClick(final View view){
+        view.post(new Runnable() {
+            @Override
+            public void run() {
+                view.performClick();
+            }
+        });
+    }
+
+    private static void onTouchView(final View view, final MotionEvent event){
+        view.post(new Runnable() {
+            @Override
+            public void run() {
+                view.onTouchEvent(event);
+            }
+        });
+    }
 
 }
