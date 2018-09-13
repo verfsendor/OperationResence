@@ -18,7 +18,12 @@ public class Util {
             case 2:
                 txt = "ACTION_MOVE";
                 break;
-
+            case 5:
+                txt = "ACTION_POINTER_DOWN";
+                break;
+            case 6:
+                txt = "ACTION_POINTER_UP";
+                break;
         }
         return txt;
     }

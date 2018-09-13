@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.operation.resence.operationresencer.view.MyTextview
+        android:id="@+id/test"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:textColor="#fff"
+        android:text="图表页测试"
+        android:background="#98929f"
+        android:gravity="center"/>
+
+    <com.operation.resence.operationresencer.view.Mychart
+        android:id="@+id/chart"
+        android:layout_below="@+id/test"
+        android:layout_width="400dp"
+        android:layout_height="400dp" />
+
+</RelativeLayout>

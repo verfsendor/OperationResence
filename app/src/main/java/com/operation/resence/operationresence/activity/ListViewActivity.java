@@ -13,8 +13,9 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.diy.charts.view.SlikLineChart;
 import com.operation.resence.operationresence.R;
-import com.operation.resence.operationresencer.MyTextview;
+import com.operation.resence.operationresencer.view.MyTextview;
 
 import java.util.ArrayList;
 
@@ -38,7 +39,7 @@ public class ListViewActivity extends AppCompatActivity{
         findViewById(R.id.label).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ListViewActivity.this, MainActivity.class));
+                startActivity(new Intent(ListViewActivity.this, SlikLineChartActivity.class));
             }
         });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

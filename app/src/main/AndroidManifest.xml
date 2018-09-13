@@ -24,6 +24,7 @@
         <activity android:name=".activity.fifthActivity"/>
         <activity android:name=".activity.FourthActivity"/>
         <activity android:name=".activity.ListViewActivity"/>
+        <activity android:name=".activity.SlikLineChartActivity"/>
     </application>
 
 </manifest>

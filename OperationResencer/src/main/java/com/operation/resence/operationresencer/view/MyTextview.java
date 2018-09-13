@@ -1,4 +1,4 @@
-package com.operation.resence.operationresencer;
+package com.operation.resence.operationresencer.view;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -25,7 +25,6 @@ public class MyTextview extends android.support.v7.widget.AppCompatTextView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
         if(!TestManager.test) {
             Log.v("verf", "haveOnTouch eventTime " + event.getEventTime()  + " downTime  " + event.getDownTime() + " " + getTag() + " " + event.getRawX() + " " + event.getRawY()
                     + " " + Util.getActionTxt(event.getAction()) + " " + getText());

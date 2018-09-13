@@ -9,16 +9,17 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="#459988"
-        android:textColor="#ffffff"/>
+        android:background="#D1EEEE"
+        android:hint="请输入文字"
+        android:textColor="#333333"/>
 
-    <com.operation.resence.operationresencer.MyTextview
+    <com.operation.resence.operationresencer.view.MyTextview
         android:id="@+id/txt"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textSize="30dp"
-        android:background="#f40444"
-        android:text="5页--"
+        android:background="#848484"
+        android:text="输入测试"
         android:gravity="center"/>
 
     <com.operation.resence.operationresencer.view.MyScrollView
@@ -28,92 +29,92 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <com.operation.resence.operationresencer.MyTextview
+            <com.operation.resence.operationresencer.view.MyTextview
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:textSize="40dp"
                 android:text="1"
                 android:gravity="center"/>
-            <com.operation.resence.operationresencer.MyTextview
+            <com.operation.resence.operationresencer.view.MyTextview
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:textSize="40dp"
                 android:text="2"
                 android:gravity="center"/>
-            <com.operation.resence.operationresencer.MyTextview
+            <com.operation.resence.operationresencer.view.MyTextview
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:textSize="40dp"
                 android:text="3"
                 android:gravity="center"/>
-            <com.operation.resence.operationresencer.MyTextview
+            <com.operation.resence.operationresencer.view.MyTextview
                 android:id="@+id/item4"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:textSize="40dp"
                 android:text="4"
                 android:gravity="center"/>
-            <com.operation.resence.operationresencer.MyTextview
+            <com.operation.resence.operationresencer.view.MyTextview
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:textSize="40dp"
                 android:text="5"
                 android:gravity="center"/>
-            <com.operation.resence.operationresencer.MyTextview
+            <com.operation.resence.operationresencer.view.MyTextview
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:textSize="40dp"
                 android:text="6"
                 android:gravity="center"/>
-            <com.operation.resence.operationresencer.MyTextview
+            <com.operation.resence.operationresencer.view.MyTextview
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:textSize="40dp"
                 android:text="7"
                 android:gravity="center"/>
-            <com.operation.resence.operationresencer.MyTextview
+            <com.operation.resence.operationresencer.view.MyTextview
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:textSize="40dp"
                 android:text="8"
                 android:gravity="center"/>
-            <com.operation.resence.operationresencer.MyTextview
+            <com.operation.resence.operationresencer.view.MyTextview
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:textSize="40dp"
                 android:text="9"
                 android:gravity="center"/>
-            <com.operation.resence.operationresencer.MyTextview
+            <com.operation.resence.operationresencer.view.MyTextview
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:textSize="40dp"
                 android:text="10"
                 android:gravity="center"/>
-            <com.operation.resence.operationresencer.MyTextview
+            <com.operation.resence.operationresencer.view.MyTextview
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:textSize="40dp"
                 android:text="11"
                 android:gravity="center"/>
-            <com.operation.resence.operationresencer.MyTextview
+            <com.operation.resence.operationresencer.view.MyTextview
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:textSize="40dp"
                 android:text="12"
                 android:gravity="center"/>
-            <com.operation.resence.operationresencer.MyTextview
+            <com.operation.resence.operationresencer.view.MyTextview
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:textSize="40dp"
                 android:text="13"
                 android:gravity="center"/>
-            <com.operation.resence.operationresencer.MyTextview
+            <com.operation.resence.operationresencer.view.MyTextview
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:textSize="40dp"
                 android:text="14"
                 android:gravity="center"/>
-            <com.operation.resence.operationresencer.MyTextview
+            <com.operation.resence.operationresencer.view.MyTextview
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:textSize="40dp"

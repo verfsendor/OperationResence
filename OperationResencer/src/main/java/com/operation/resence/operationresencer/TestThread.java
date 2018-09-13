@@ -59,9 +59,7 @@ public class TestThread extends Thread {
                     if (((TouchEventBean) event).getAction() == MotionEvent.ACTION_DOWN) {
                         downtime = SystemClock.uptimeMillis();
                     }
-                    MotionEvent motionEvent = MotionEvent.obtain(downtime == 0 ? SystemClock.uptimeMillis() : downtime,
-                            SystemClock.uptimeMillis(), ((TouchEventBean) event).getAction(), ((TouchEventBean) event).getRawX(), ((TouchEventBean) event).getRawY(), 0);
-                    //派发事件
+                    MotionEvent motionEvent = ((TouchEventBean) event).toMotionEvent(downtime == 0 ? SystemClock.uptimeMillis() : downtime);
                     ViewManager.setTouchEventToView(Constants.nowActivityName.getWindow().getDecorView(), motionEvent, path[0], path[1], "");
                     if (((TouchEventBean) event).getAction() == MotionEvent.ACTION_UP) {
                         downtime = 0;

@@ -29,6 +29,22 @@ public class OnTouchListenerProxy implements View.OnTouchListener {
             eventBean.setTime(event.getEventTime());
             eventBean.setAction(event.getAction());
             eventBean.setPageName("" + v.getTag());
+            if(event.getPointerCount() > 1){
+                eventBean.setPointerCount(2);
+                eventBean.setPointerCount(event.getPointerCount());
+                eventBean.setPressure(event.getPressure());
+                eventBean.setSize(event.getSize());
+                eventBean.setxPrecision(event.getXPrecision());
+                eventBean.setyPrecision(event.getYPrecision());
+                eventBean.setDeviceId(event.getDeviceId());
+                eventBean.setEdgeFlags(event.getEdgeFlags());
+                eventBean.setPid1(event.getPointerId(0));
+                eventBean.setPid2(event.getPointerId(1));
+                eventBean.setX1(event.getX(0));
+                eventBean.setY1(event.getY(0));
+                eventBean.setX2(event.getX(1));
+                eventBean.setY2(event.getY(1));
+            }
             TestManager.addEvent(eventBean);
         }
         long currentTime = System.currentTimeMillis();

@@ -176,6 +176,7 @@ public class ViewManager {
     }
 
     private static void onTouchView(final View view, final MotionEvent event){
+
         view.post(new Runnable() {
             @Override
             public void run() {
