@@ -4,13 +4,13 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import com.google.gson.Gson;
 import com.operation.resence.operationresencer.bean.BaseEvent;
 import com.operation.resence.operationresencer.bean.EditTextEventBean;
 import com.operation.resence.operationresencer.bean.TouchEventBean;
 import com.operation.resence.operationresencer.utils.Constants;
-import com.operation.resence.operationresencer.utils.TestManager;
-import static com.operation.resence.operationresencer.utils.TestManager.events;
+import com.operation.resence.operationresencer.utils.OperationResencer;
+
+import static com.operation.resence.operationresencer.utils.OperationResencer.events;
 /**
  * Created by xuzhendong on 2018/9/11.
  */
@@ -23,7 +23,7 @@ public class TestThread extends Thread {
     @Override
     public void run() {
         //关闭记录阀门，复现过程事件不会被记录
-        TestManager.test = false;
+        OperationResencer.test = false;
         //休眠1秒，再开始复现过程
         try {
             sleep(1000);
@@ -31,11 +31,11 @@ public class TestThread extends Thread {
             e.printStackTrace();
         }
         i = 0;
-        while (TestManager.events != null && TestManager.events.size() > i){
+        while (OperationResencer.events != null && OperationResencer.events.size() > i){
 //            Log.v("verf","sendEvent " + i);
             long delay = 0;
             if( i - 1 > 0){
-                delay = TestManager.events.get(i).getTime() - TestManager.events.get(i - 1).getTime();
+                delay = OperationResencer.events.get(i).getTime() - OperationResencer.events.get(i - 1).getTime();
             }
             /**
              * path分割字符串 "#"前面部分为view所属界面的类名，如果与当前显示的界面不同，就休眠线程进行等待
@@ -73,7 +73,7 @@ public class TestThread extends Thread {
         }
         Log.v("verf","*******************************复现结束**************");
         //执行结束后清空记录的事件
-        TestManager.events.clear();
+        OperationResencer.events.clear();
         ViewManager.recycle();
     }
 }

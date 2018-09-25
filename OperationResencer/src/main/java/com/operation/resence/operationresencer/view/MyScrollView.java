@@ -6,8 +6,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ScrollView;
 
-import com.operation.resence.operationresencer.bean.TouchEventBean;
-import com.operation.resence.operationresencer.utils.TestManager;
 import com.operation.resence.operationresencer.utils.Util;
 
 /**

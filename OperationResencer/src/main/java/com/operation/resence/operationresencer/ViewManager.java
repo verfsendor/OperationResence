@@ -1,6 +1,5 @@
 package com.operation.resence.operationresencer;
 
-import android.app.Instrumentation;
 import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,8 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.operation.resence.operationresencer.bean.EditTextEventBean;
-import com.operation.resence.operationresencer.bean.TouchEventBean;
-import com.operation.resence.operationresencer.utils.TestManager;
+import com.operation.resence.operationresencer.utils.OperationResencer;
 
 /**
  * Created by xuzhendong on 2018/9/10.
@@ -62,13 +60,13 @@ public class ViewManager {
 
                     @Override
                     public void afterTextChanged(Editable s) {
-                        if(TestManager.test){
+                        if(OperationResencer.test){
                             Log.v("verf","添加 ontouch事件 ");
                             EditTextEventBean eventBean = new EditTextEventBean();
                             eventBean.setTime(SystemClock.uptimeMillis());
                             eventBean.setPageName("" + view.getTag());
                             eventBean.setTxt(((EditText) view).getText().toString());
-                            TestManager.addEvent(eventBean);
+                            OperationResencer.addEvent(eventBean);
                         }
 //                        Log.v("verf","view id " + view.getTag() + " " + ((EditText) view).getText());
                     }

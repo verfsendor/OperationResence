@@ -1,12 +1,10 @@
 package com.operation.resence.operationresencer.proxy;
 
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.operation.resence.operationresencer.bean.TouchEventBean;
-import com.operation.resence.operationresencer.utils.TestManager;
-import com.operation.resence.operationresencer.utils.Util;
+import com.operation.resence.operationresencer.utils.OperationResencer;
 
 /**
  * Created by xuzhendong on 2018/9/11.
@@ -22,7 +20,7 @@ public class OnTouchListenerProxy implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        if(TestManager.test){
+        if(OperationResencer.test){
             TouchEventBean eventBean = new TouchEventBean();
             eventBean.setRawX(event.getRawX());
             eventBean.setRawY(event.getRawY());
@@ -45,7 +43,7 @@ public class OnTouchListenerProxy implements View.OnTouchListener {
                 eventBean.setX2(event.getX(1));
                 eventBean.setY2(event.getY(1));
             }
-            TestManager.addEvent(eventBean);
+            OperationResencer.addEvent(eventBean);
         }
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastClickTime > MIN_CLICK_DELAY_TIME) {

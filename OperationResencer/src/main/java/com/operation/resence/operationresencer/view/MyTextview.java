@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import com.operation.resence.operationresencer.utils.TestManager;
+import com.operation.resence.operationresencer.utils.OperationResencer;
 import com.operation.resence.operationresencer.utils.Util;
 /**
  * Created by xuzhendong on 2018/9/11.
@@ -25,7 +25,7 @@ public class MyTextview extends android.support.v7.widget.AppCompatTextView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(!TestManager.test) {
+        if(!OperationResencer.test) {
             Log.v("verf", "haveOnTouch eventTime " + event.getEventTime()  + " downTime  " + event.getDownTime() + " " + getTag() + " " + event.getRawX() + " " + event.getRawY()
                     + " " + Util.getActionTxt(event.getAction()) + " " + getText());
         }

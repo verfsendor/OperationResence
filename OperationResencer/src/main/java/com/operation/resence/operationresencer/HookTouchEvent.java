@@ -14,7 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import com.operation.resence.operationresencer.bean.KeyEventBean;
-import com.operation.resence.operationresencer.utils.TestManager;
+import com.operation.resence.operationresencer.utils.OperationResencer;
 import java.util.List;
 
 /**
@@ -29,12 +29,12 @@ public class HookTouchEvent implements Window.Callback {
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-        if(TestManager.test){
+        if(OperationResencer.test){
             KeyEventBean keyEventBean = new KeyEventBean();
             keyEventBean.setTime(System.currentTimeMillis());
             keyEventBean.setKeyCode(event.getKeyCode());
             keyEventBean.setPageName(mCallback.getClass().getSimpleName());
-            TestManager.addEvent(keyEventBean);
+            OperationResencer.addEvent(keyEventBean);
         }
         mCallback.dispatchKeyEvent(event);
         return mCallback.dispatchKeyEvent(event);
@@ -48,14 +48,14 @@ public class HookTouchEvent implements Window.Callback {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        if(TestManager.test){
+        if(OperationResencer.test){
 //            TouchEventBean eventBean = new TouchEventBean();
 //            eventBean.setRawX(event.getRawX());
 //            eventBean.setRawY(event.getRawY());
 //            eventBean.setTime(System.currentTimeMillis());
 //            eventBean.setAction(event.getAction());
 //            eventBean.setPageName(mCallback.getClass().getSimpleName());
-//            TestManager.addEvent(eventBean);
+//            OperationResencer.addEvent(eventBean);
         }else {
 //            ViewManager.setEventToView(Constants.nowActivityName.getWindow().getDecorView(),event,"-0-1-0-0-0-1","");
         }

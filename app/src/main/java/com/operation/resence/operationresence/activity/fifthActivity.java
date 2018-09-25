@@ -1,23 +1,13 @@
 package com.operation.resence.operationresence.activity;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.operation.resence.operationresence.R;
-import com.operation.resence.operationresencer.ViewManager;
-import com.operation.resence.operationresencer.bean.TouchEventBean;
-import com.operation.resence.operationresencer.utils.Constants;
-
-import static com.operation.resence.operationresencer.utils.TestManager.events;
 
 /**
  * Created by xuzhendong on 2018/9/10.

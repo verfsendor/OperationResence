@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.operation.resence.operationresencer.utils.TestManager;
+import com.operation.resence.operationresencer.utils.OperationResencer;
 import com.operation.resence.operationresencer.utils.Util;
 
 /**
@@ -25,7 +25,7 @@ public class MyView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(!TestManager.test) {
+        if(!OperationResencer.test) {
             Log.v("verf", "haveOnTouch eventTime " + event.getEventTime()  + " downTime  " + event.getDownTime() + " " + getTag() + " " + event.getRawX() + " " + event.getRawY()
                     + " " + Util.getActionTxt(event.getAction()));
         }

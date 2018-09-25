@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.diy.charts.view.SlikLineChart;
-import com.operation.resence.operationresencer.utils.TestManager;
+import com.operation.resence.operationresencer.utils.OperationResencer;
 import com.operation.resence.operationresencer.utils.Util;
 
 /**
@@ -29,11 +29,11 @@ public class Mychart extends SlikLineChart {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(TestManager.test) {
+        if(OperationResencer.test) {
             Log.v("lalala", "chart click " + event.getAction() + "  " + event.getRawX() + " " + event.getRawY() + " " + Util.getActionTxt(event.getAction())
                     + " PointerCount = " + event.getPointerCount());
         }
-        if(!TestManager.test) {
+        if(!OperationResencer.test) {
             Log.v("lalala", "chart 接到事件 "  + event.getAction() + "  "+ event.getRawX() + " " + event.getRawY() + " " + Util.getActionTxt(event.getAction())
                     + " PointerCount = " + event.getPointerCount());
         }

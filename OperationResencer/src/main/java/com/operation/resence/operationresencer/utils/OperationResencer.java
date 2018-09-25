@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * Created by xuzhendong on 2018/9/11.
  */
 
-public class TestManager {
+public class OperationResencer {
     public static boolean test = true; //判断记录是否开启，为true时才会记录点击值
     public static ArrayList<BaseEvent> events = new ArrayList<>();//记录点击过程的事件
 
@@ -35,6 +35,10 @@ public class TestManager {
         if(events.size() < 500) {
             events.add(event);
         }
+    }
+
+    public static boolean isRecording() {
+        return test;
     }
 
     public static void startTest(){

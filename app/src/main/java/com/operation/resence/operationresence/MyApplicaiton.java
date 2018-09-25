@@ -4,7 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.operation.resence.operationresencer.HookHelper;
-import com.operation.resence.operationresencer.utils.TestManager;
+import com.operation.resence.operationresencer.utils.OperationResencer;
 
 /**
  * Created by xuzhendong on 2018/9/10.
@@ -16,7 +16,7 @@ public class MyApplicaiton extends Application {
         super.onCreate();
         try {
             HookHelper.replaceInstrumentation();
-            Log.v("verf"," TestManager size " + TestManager.events.size());
+            Log.v("verf"," OperationResencer size " + OperationResencer.events.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
