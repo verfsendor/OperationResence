@@ -22,7 +22,6 @@ public class OnClickListenerProxy implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         long currentTime = System.currentTimeMillis();
-
         if (currentTime - lastClickTime > MIN_CLICK_DELAY_TIME) {
             lastClickTime = currentTime;
             if(object != null){

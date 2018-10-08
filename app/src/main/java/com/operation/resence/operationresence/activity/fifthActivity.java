@@ -80,21 +80,21 @@ public class fifthActivity extends AppCompatActivity {
 //        MotionEvent motionEvent1 = MotionEvent.obtain( time,
 //                SystemClock.uptimeMillis(), bean1.getAction(), bean1.getRawX(), bean1.getRawY(), 0);
 //        //派发事件
-//        ViewManager.setTouchEventToView(Constants.nowActivityName.getWindow().getDecorView(),motionEvent1,path[0],path[1],"");
+//        ViewHelper.handleTouchEventToView(Constants.nowActivityName.getWindow().getDecorView(),motionEvent1,path[0],path[1],"");
 //
 //        MotionEvent motionEvent2 = MotionEvent.obtain( time,
 //                SystemClock.uptimeMillis(), bean2.getAction(), bean2.getRawX(), bean2.getRawY(), 0);
 //        //派发事件
-//        ViewManager.setTouchEventToView(Constants.nowActivityName.getWindow().getDecorView(),motionEvent2,path[0],path[1],"");
+//        ViewHelper.handleTouchEventToView(Constants.nowActivityName.getWindow().getDecorView(),motionEvent2,path[0],path[1],"");
 //
 //        MotionEvent motionEvent3 = MotionEvent.obtain( time,
 //                SystemClock.uptimeMillis(), bean3.getAction(), bean3.getRawX(), bean3.getRawY(), 0);
 //        //派发事件
-//        ViewManager.setTouchEventToView(Constants.nowActivityName.getWindow().getDecorView(),motionEvent3,path[0],path[1],"");
+//        ViewHelper.handleTouchEventToView(Constants.nowActivityName.getWindow().getDecorView(),motionEvent3,path[0],path[1],"");
 //
 //        MotionEvent motionEvent4 = MotionEvent.obtain( time,
 //                SystemClock.uptimeMillis(), bean4.getAction(), bean4.getRawX(), bean4.getRawY(), 0);
 //        //派发事件
-//        ViewManager.setTouchEventToView(Constants.nowActivityName.getWindow().getDecorView(),motionEvent4,path[0],path[1],"");
+//        ViewHelper.handleTouchEventToView(Constants.nowActivityName.getWindow().getDecorView(),motionEvent4,path[0],path[1],"");
 //    }
 }

@@ -1,7 +1,6 @@
 package com.operation.resence.operationresencer.bean;
 
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.InputDevice;
 import android.view.MotionEvent;
 
@@ -9,7 +8,7 @@ import android.view.MotionEvent;
  * Created by xuzhendong on 2018/9/11.
  */
 
-public class TouchEventBean extends BaseEvent{
+public class TouchEventBean extends BaseEventBean {
     private int action;
     private float rawX;
     private float rawY;
@@ -26,44 +25,12 @@ public class TouchEventBean extends BaseEvent{
     private float y2;
     private int pid1;
     private int pid2;
-    /**
-     *    long downTime, long eventTime,
-     int action, int pointerCount, int[] pointerIds, PointerCoords[] pointerCoords,
-     int metaState, float xPrecision, float yPrecision, int deviceId,
-     int edgeFlags, int source, int flags)
-
-     long downTime, long eventTime, int action,
-     float x, float y, float pressure, float size, int metaState,
-     float xPrecision, float yPrecision, int deviceId, int edgeFlags)
-
-     (long downTime, long eventTime,
-     int action, int pointerCount, PointerProperties[] pointerProperties, MotionEvent.PointerCoords[] pointerCoords,
-     int metaState, int buttonState, float xPrecision, float yPrecision, int deviceId, int edgeFlags,
-     int source, int flags)
-
-
-
-     long downTime, long eventTime, int action, int pointerCount, int[] pointerIds,
-     MotionEvent.PointerCoords[] pointerCoords, int metaState, float xPrecision, float yPrecision, int deviceId,
-     int edgeFlags, int source, int flags)
-
-     /**
-     * (long downTime, long eventTime,
-     int action, int pointerCount, PointerProperties[] pointerProperties, MotionEvent.PointerCoords[] pointerCoords,
-     int metaState, int buttonState, float xPrecision, float yPrecision, int deviceId, int edgeFlags,
-     int source, int flags)
-     */
 
     /**
      * 根据touchEventBean生成MotionEvent
      * @return
      */
     public MotionEvent toMotionEvent(long downTime){
-
-//         long downTime, long eventTime, int action, int pointerCount, float x, float y,
-//         float pressure, float size, int metaState, float xPrecision, float yPrecision,
-//         int deviceId, int edgeFlags)
-
         if(pointerCount > 1){
             MotionEvent.PointerProperties[] pointerProperties = new MotionEvent.PointerProperties[2];
             MotionEvent.PointerCoords[] pointerCoords = new MotionEvent.PointerCoords[2];

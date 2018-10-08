@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.GridView;
 
-import com.operation.resence.operationresencer.utils.OperationResencer;
+import com.operation.resence.operationresencer.OperationResencer;
 import com.operation.resence.operationresencer.utils.Util;
 
 /**

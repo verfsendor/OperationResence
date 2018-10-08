@@ -4,9 +4,8 @@ package com.operation.resence.operationresencer.bean;
  * Created by xuzhendong on 2018/9/11.
  */
 
-public class KeyEventBean extends BaseEvent {
+public class KeyEventBean extends BaseEventBean {
     private int keyCode;
-
     public int getKeyCode() {
         return keyCode;
     }

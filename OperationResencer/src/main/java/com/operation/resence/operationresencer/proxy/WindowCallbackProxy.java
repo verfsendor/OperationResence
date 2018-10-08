@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -16,8 +15,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 
-import com.operation.resence.operationresencer.HookHelper;
 import com.operation.resence.operationresencer.utils.Constants;
+import com.operation.resence.operationresencer.utils.HookHelper;
 
 public class WindowCallbackProxy implements Window.Callback {
     final Window.Callback callback;
@@ -95,8 +94,9 @@ public class WindowCallbackProxy implements Window.Callback {
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
-        HookHelper.hookWindowManagerGlobal(activity);
-        Log.v("verf",Constants.nowActivityName.getClass().getSimpleName() + " onWindowFocusChanged " + hasFocus );
+        Constants.focusWindowActivityName = Constants.nowActivityName.getClass().getSimpleName();
+        Constants.hasFocus = hasFocus;
+        HookHelper.hookWindowManagerGlobal();
         callback.onWindowFocusChanged(hasFocus);
     }
 

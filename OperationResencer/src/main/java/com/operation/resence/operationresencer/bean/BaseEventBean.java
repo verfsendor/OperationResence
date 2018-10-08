@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by xuzhendong on 2018/9/11.
  */
 
-public class BaseEvent implements Serializable{
+public class BaseEventBean implements Serializable{
     private long time;
     private float screenWidth;
     private float screenHeight;

@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.operation.resence.operationresence.R;
-import com.operation.resence.operationresencer.utils.OperationResencer;
+import com.operation.resence.operationresencer.OperationResencer;
 
 public class MainActivity extends AppCompatActivity {
     int i = 0;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         Log.v("verf","onResume size " + OperationResencer.events.size());
         if(OperationResencer.events.size() > 0){
-            OperationResencer.startTest();
+            OperationResencer.startResence();
         }
     }
 

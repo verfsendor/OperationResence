@@ -1,4 +1,4 @@
-package com.operation.resence.operationresencer;
+package com.operation.resence.operationresencer.utils;
 
 import android.os.SystemClock;
 import android.text.Editable;
@@ -8,18 +8,18 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.operation.resence.operationresencer.bean.EditTextEventBean;
-import com.operation.resence.operationresencer.utils.OperationResencer;
+import com.operation.resence.operationresencer.listener.AttachListener;
+import com.operation.resence.operationresencer.OperationResencer;
 
 /**
  * Created by xuzhendong on 2018/9/10.
  */
 
-public class ViewManager {
+public class ViewHelper {
     /**
-     * 保存上次派发事件的view和tag，如果和上次tag相同，直接传给view，节省时间，不再进行遍历查询
+     * 保存上次派发事件的view和tag，如果和上次tag相同，直接传给lastView，节省时间，不再进行遍历查找
      */
      private static View lastView;
      private static String lastPath;
@@ -31,6 +31,7 @@ public class ViewManager {
      */
     public  static  void travelView(String page, final View view){
         HookHelper.hookViewClickListener(view);
+        HookHelper.hookOnTouchEventListener(view);
         if(view instanceof ViewGroup){
             for(int i = 0; i < ((ViewGroup) view).getChildCount(); i ++){
                 View childView = ((ViewGroup) view).getChildAt(i);
@@ -44,38 +45,9 @@ public class ViewManager {
             if(((ViewGroup) view).getChildCount() == 0) {
                 view.addOnAttachStateChangeListener(new AttachListener());
             }
-            HookHelper.hookOnTouchEventListener(view);
         }else {
             if(view instanceof EditText){
-                ((EditText) view).addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        if(OperationResencer.test){
-                            Log.v("verf","添加 ontouch事件 ");
-                            EditTextEventBean eventBean = new EditTextEventBean();
-                            eventBean.setTime(SystemClock.uptimeMillis());
-                            eventBean.setPageName("" + view.getTag());
-                            eventBean.setTxt(((EditText) view).getText().toString());
-                            OperationResencer.addEvent(eventBean);
-                        }
-//                        Log.v("verf","view id " + view.getTag() + " " + ((EditText) view).getText());
-                    }
-                });
-            }else{
-                HookHelper.hookOnTouchEventListener(view);
-                if(view instanceof TextView){
-//                Log.v("verf","view id " + view.getTag() + " " + ((TextView) view).getText());
-                }
+                addEditTxtChangeListener((EditText)view);
             }
         }
     }
@@ -88,24 +60,19 @@ public class ViewManager {
      * @param path 当前目标view的路径
      * @param tag 当前已经遍历到的view路径，用于递归时的比较
      */
-    public  static  void setTouchEventToView(final View view, MotionEvent motionEvent,String page, String path, String tag){
+    public static void handleTouchEventToView(final View view, MotionEvent motionEvent, String page, String path, String tag){
         if(path.equals(lastPath) && page.equals(lastPage)){
-            Log.v("verf","相同view  " + sameEventNum + " " + motionEvent.getAction());
-//            lastView.onTouchEvent(motionEvent);
             onTouchView(lastView, motionEvent);
             sameEventNum ++;
             if(motionEvent.getAction() == MotionEvent.ACTION_UP){
                 if(sameEventNum < 10){
-                    Log.v("verf","触发点击 " + sameEventNum + " " + view.getTag());
                     perfromClick(lastView);
                 }
-                Log.v("verf","抬起清零 ");
                 sameEventNum = 0;
             }
             return;
         }
         if(tag.equals(path)){
-            Log.v("verf","开始落下  " + sameEventNum + " " + motionEvent.getAction());
             onTouchView(view, motionEvent);
             lastView = view;
             lastPath = path;
@@ -119,7 +86,7 @@ public class ViewManager {
                 View childView = ((ViewGroup) view).getChildAt(i);
                 txt = tag + "-" + i;
                 if(txt.length() <= path.length() && path.substring(0, txt.length()).equals(txt)){
-                    setTouchEventToView(childView, motionEvent, page, path, tag + "-" + i);
+                    handleTouchEventToView(childView, motionEvent, page, path, tag + "-" + i);
                     break;
                 }
             }
@@ -130,7 +97,7 @@ public class ViewManager {
      * 遍历view树,设置文本
      * @param view
      */
-    public  static  void setTextEventToView(final View view, final String txtString, String path, String tag){
+    public  static  void handleTextEventToView(final View view, final String txtString, String path, String tag){
         if(tag.equals(path) && view instanceof EditText){
             Log.v("kkk","settext0");
             view.post(new Runnable() {
@@ -147,21 +114,11 @@ public class ViewManager {
                 View childView = ((ViewGroup) view).getChildAt(i);
                 txt = tag + "-" + i;
                 if(txt.length() <= path.length() && path.substring(0, txt.length()).equals(txt)){
-                    setTextEventToView(childView, txtString, path, tag + "-" + i);
+                    handleTextEventToView(childView, txtString, path, tag + "-" + i);
                     break;
                 }
             }
         }
-    }
-
-
-    /**
-     * 一次复现完成后释放持有的view对象
-     */
-    public static void recycle(){
-        lastView = null;
-        lastPath = "";
-        lastPage = "";
     }
 
     private static void perfromClick(final View view){
@@ -174,13 +131,52 @@ public class ViewManager {
     }
 
     private static void onTouchView(final View view, final MotionEvent event){
-
         view.post(new Runnable() {
             @Override
             public void run() {
                 view.onTouchEvent(event);
             }
         });
+    }
+
+    /**
+     * 为EditText添加监听
+     * @param editText
+     */
+    private static void addEditTxtChangeListener(final EditText editText){
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(OperationResencer.recording){
+                    Log.v("verf","添加 ontouch事件 ");
+                    EditTextEventBean eventBean = new EditTextEventBean();
+                    eventBean.setTime(SystemClock.uptimeMillis());
+                    eventBean.setPageName("" + editText.getTag());
+                    eventBean.setTxt(editText.getText().toString());
+                    OperationResencer.addEvent(eventBean);
+                }
+//                        Log.v("verf","view id " + view.getTag() + " " + ((EditText) view).getText());
+            }
+        });
+    }
+
+    /**
+     * 一次复现完成后释放持有的view对象
+     */
+    public static void recycle(){
+        lastView = null;
+        lastPath = "";
+        lastPage = "";
     }
 
 }

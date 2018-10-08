@@ -1,11 +1,7 @@
-package com.operation.resence.operationresencer;
-import android.app.Activity;
-import android.app.FragmentManager;
+package com.operation.resence.operationresencer.utils;
 import android.app.Instrumentation;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.operation.resence.operationresencer.proxy.InstrumentationProxy;
 import com.operation.resence.operationresencer.proxy.OnClickListenerProxy;
@@ -128,57 +124,29 @@ public class HookHelper {
         }
     }
 
-    public static void hookFragment(FragmentManager manager){
-        ViewGroup viewGroup = null ;
-
+    public static void hookWindowManagerGlobal(){
         try {
-            Class<?> activityThreadClass = Class.forName("android.support.v4.app.BackStackRecord");
-            Method replace = activityThreadClass.getDeclaredMethod("replace",Integer.class, Fragment.class, String.class);
-            android.app.FragmentTransaction fragmentTransaction= manager.beginTransaction();
-        }catch (Exception e){
-
-        }
-        // 先获取到当前的ActivityThread对象
-    }
-
-    public static void hookWindowManagerGlobal(Activity activity){
-        Log.v("verf","hookWindowManagerGlobal into");
-        try {
-            Class activityClazz = Class.forName("android.app.Activity");
-            //事件监听器都是这个实例保存的
-            Method getWmMethod = activityClazz.getDeclaredMethod("getWindowManager");
-            if (!getWmMethod.isAccessible()) {
-                getWmMethod.setAccessible(true);
-            }
-            Object windowManagerObject = getWmMethod.invoke(activity);
-
-            Class windowmanagerClazz = Class.forName("android.view.WindowManagerImpl");
-
-            Field mGlobalField = windowmanagerClazz.getDeclaredField("mGlobal");
-
-            if (!mGlobalField.isAccessible()) {
-                mGlobalField.setAccessible(true);
-            }
-            Object globalObject = mGlobalField.get(windowManagerObject);
-
             Class globalClass = Class.forName("android.view.WindowManagerGlobal");
-
+            Method getInstanceMethod = globalClass.getDeclaredMethod("getWindowManager");
+            if (!getInstanceMethod.isAccessible()) {
+                getInstanceMethod.setAccessible(true);
+            }
+            Object globalObject = getInstanceMethod.invoke(null);
             Field mViewsField = globalClass.getDeclaredField("mViews");
 
             if (!mViewsField.isAccessible()) {
                 mViewsField.setAccessible(true);
             }
             ArrayList<View> views = (ArrayList<View>) mViewsField.get(globalObject) ;
-            Log.v("verf","hookWindowManagerGlobal views " + (views == null ? " =null" : views.size()));
-            if(views != null) {
-                Log.v("verf", "hookWindowManagerGlobal haveget " + views.get(views.size() - 1));
+            Log.v("verf","hooknew views " + (views == null ? " =null" : views.size()));
+            if(views != null && views.size() > 0) {
+                View view = views.get(views.size() - 1);
+                Log.v("verf", "hooknew haveget " + views.get(views.size() - 1));
+                ViewHelper.travelView(Constants.nowActivityName.getClass().getSimpleName(), view);
             }
-
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
-        // 先获取到当前的ActivityThread对象
+
     }
-
-
 }
