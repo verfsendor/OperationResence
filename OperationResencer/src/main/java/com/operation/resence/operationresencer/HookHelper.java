@@ -141,44 +141,30 @@ public class HookHelper {
         // 先获取到当前的ActivityThread对象
     }
 
-    public static void hookWindowManagerGlobal(Activity activity){
-        Log.v("verf","hookWindowManagerGlobal into");
+    /**
+     * 反射获取WindowManagerGlobal中的view的list列表实例，顶层view即为当前获取焦点的view
+     */
+    public static void hookWindowManagerGlobal(){
         try {
-            Class activityClazz = Class.forName("android.app.Activity");
-            //事件监听器都是这个实例保存的
-            Method getWmMethod = activityClazz.getDeclaredMethod("getWindowManager");
-            if (!getWmMethod.isAccessible()) {
-                getWmMethod.setAccessible(true);
-            }
-            Object windowManagerObject = getWmMethod.invoke(activity);
-
-            Class windowmanagerClazz = Class.forName("android.view.WindowManagerImpl");
-
-            Field mGlobalField = windowmanagerClazz.getDeclaredField("mGlobal");
-
-            if (!mGlobalField.isAccessible()) {
-                mGlobalField.setAccessible(true);
-            }
-            Object globalObject = mGlobalField.get(windowManagerObject);
-
             Class globalClass = Class.forName("android.view.WindowManagerGlobal");
-
+            Method getInstanceMethod = globalClass.getDeclaredMethod("getInstance");
+            if (!getInstanceMethod.isAccessible()) {
+                getInstanceMethod.setAccessible(true);
+            }
+            Object globalObject = getInstanceMethod.invoke(null);
             Field mViewsField = globalClass.getDeclaredField("mViews");
-
             if (!mViewsField.isAccessible()) {
                 mViewsField.setAccessible(true);
             }
             ArrayList<View> views = (ArrayList<View>) mViewsField.get(globalObject) ;
-            Log.v("verf","hookWindowManagerGlobal views " + (views == null ? " =null" : views.size()));
+            Log.v("verf","hookWindowManagerGlobalnew  views " + (views == null ? " =null" : views.size()));
             if(views != null) {
-                Log.v("verf", "hookWindowManagerGlobal haveget " + views.get(views.size() - 1));
+                Log.v("verf", "hookWindowManagerGlobalnew haveget " + views.get(views.size() - 1));
             }
-
-        } catch (Exception e) {
+        }catch (Exception e) {
             e.printStackTrace();
         }
-        // 先获取到当前的ActivityThread对象
-    }
 
+    }
 
 }

@@ -95,7 +95,7 @@ public class WindowCallbackProxy implements Window.Callback {
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
-        HookHelper.hookWindowManagerGlobal(activity);
+        HookHelper.hookWindowManagerGlobal();
         Log.v("verf",Constants.nowActivityName.getClass().getSimpleName() + " onWindowFocusChanged " + hasFocus );
         callback.onWindowFocusChanged(hasFocus);
     }

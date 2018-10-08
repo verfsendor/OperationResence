@@ -6,12 +6,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.operation.resence.operationresence.Fragment.FirstFragment;
 import com.operation.resence.operationresence.R;
+import com.operation.resence.operationresence.utils.FragmentUtils;
 
 /**
  * Created by xuzhendong on 2018/9/10.
  */
-public class ThirdActivity extends AppCompatActivity {
+public class MyFragmentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,10 +21,9 @@ public class ThirdActivity extends AppCompatActivity {
         findViewById(R.id.txt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ThirdActivity.this, PopwindowActivity.class));
+                startActivity(new Intent(MyFragmentActivity.this, PopwindowActivity.class));
             }
         });
-
-//        FragmentUtils.replaceFragmentWithAnim(getSupportFragmentManager(), FirstFragment.class, R.id.frame, null);
+        FragmentUtils.replaceFragmentWithAnim(getSupportFragmentManager(), FirstFragment.class, R.id.frame, null);
     }
 }
