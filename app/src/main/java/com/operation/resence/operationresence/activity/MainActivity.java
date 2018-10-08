@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.txt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, fifthActivity.class));
+                startActivity(new Intent(MainActivity.this, PopwindowActivity.class));
             }
         });
         findViewById(R.id.txt).setOnTouchListener(new View.OnTouchListener() {
@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -44,6 +46,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStop() {
+        Log.v("verf","mainactivity onstop");
+        super.onStop();
+    }
+    @Override
+    protected void onDestroy() {
+        Log.v("verf","mainactivity onDestroy");
+        super.onDestroy();
+    }
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         return super.dispatchTouchEvent(ev);

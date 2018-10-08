@@ -3,6 +3,22 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <Button
+        android:id="@+id/btn_show_pop"
+        android:text="展示popwindow"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <Button
+        android:id="@+id/btn_show_dialog"
+        android:text="展示dialog"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
 
 
+    <Button
+        android:id="@+id/btn_show_next"
+        android:text="下一页"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
 </LinearLayout>

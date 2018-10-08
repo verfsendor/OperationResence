@@ -4,6 +4,8 @@ import android.app.Instrumentation;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
+
+import com.operation.resence.operationresencer.HookHelper;
 import com.operation.resence.operationresencer.HookTouchEvent;
 import com.operation.resence.operationresencer.ViewManager;
 import com.operation.resence.operationresencer.utils.Constants;
@@ -30,8 +32,8 @@ public  class InstrumentationProxy extends Instrumentation {
     public void callActivityOnCreate(Activity activity, Bundle icicle) {
         try {
             if(activity.getWindow() != null) {
-//                Window window = activity.getWindow();
-//                window.setCallback(new HookTouchEvent(window.getCallback()));
+                Window window = activity.getWindow();
+                window.setCallback(new WindowCallbackProxy(activity,window.getCallback()));
                 Method callActivityOnCreate = Instrumentation.class.getDeclaredMethod("callActivityOnCreate", Activity.class, Bundle.class);
                 callActivityOnCreate.setAccessible(true);
                 callActivityOnCreate.invoke(mBase, activity, icicle);

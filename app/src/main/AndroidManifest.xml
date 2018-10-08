@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SecondActivity"/>
+        <activity android:name=".activity.PopwindowActivity"/>
         <activity android:name=".activity.ThirdActivity"/>
         <activity android:name=".activity.fifthActivity"/>
         <activity android:name=".activity.FourthActivity"/>

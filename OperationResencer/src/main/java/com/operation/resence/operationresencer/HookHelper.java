@@ -1,4 +1,5 @@
 package com.operation.resence.operationresencer;
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.Instrumentation;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import com.operation.resence.operationresencer.proxy.OnTouchListenerProxy;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 /**
  * Created by xuzhendong on 2018/9/7. InputMethodManager
@@ -138,5 +140,45 @@ public class HookHelper {
         }
         // 先获取到当前的ActivityThread对象
     }
+
+    public static void hookWindowManagerGlobal(Activity activity){
+        Log.v("verf","hookWindowManagerGlobal into");
+        try {
+            Class activityClazz = Class.forName("android.app.Activity");
+            //事件监听器都是这个实例保存的
+            Method getWmMethod = activityClazz.getDeclaredMethod("getWindowManager");
+            if (!getWmMethod.isAccessible()) {
+                getWmMethod.setAccessible(true);
+            }
+            Object windowManagerObject = getWmMethod.invoke(activity);
+
+            Class windowmanagerClazz = Class.forName("android.view.WindowManagerImpl");
+
+            Field mGlobalField = windowmanagerClazz.getDeclaredField("mGlobal");
+
+            if (!mGlobalField.isAccessible()) {
+                mGlobalField.setAccessible(true);
+            }
+            Object globalObject = mGlobalField.get(windowManagerObject);
+
+            Class globalClass = Class.forName("android.view.WindowManagerGlobal");
+
+            Field mViewsField = globalClass.getDeclaredField("mViews");
+
+            if (!mViewsField.isAccessible()) {
+                mViewsField.setAccessible(true);
+            }
+            ArrayList<View> views = (ArrayList<View>) mViewsField.get(globalObject) ;
+            Log.v("verf","hookWindowManagerGlobal views " + (views == null ? " =null" : views.size()));
+            if(views != null) {
+                Log.v("verf", "hookWindowManagerGlobal haveget " + views.get(views.size() - 1));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // 先获取到当前的ActivityThread对象
+    }
+
 
 }
