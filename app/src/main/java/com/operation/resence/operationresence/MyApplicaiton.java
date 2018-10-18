@@ -14,11 +14,6 @@ public class MyApplicaiton extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        try {
-            HookHelper.replaceInstrumentation();
-            Log.v("verf"," OperationResencer size " + OperationResencer.events.size());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        HookHelper.replaceInstrumentation();
     }
 }

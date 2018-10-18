@@ -8,7 +8,7 @@ import android.util.Log;
  */
 
 public class Constants {
-    public static Activity nowActivityName = null;
+    public static Activity currentActivity = null;
     public static String focusWindowActivityName;
     public static boolean hasFocus;
     public static final long MAX_RECORDS = 500;//最大记录条数

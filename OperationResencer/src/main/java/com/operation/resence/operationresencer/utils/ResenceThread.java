@@ -36,11 +36,11 @@ public class ResenceThread extends Thread {
              * */
             String[] path = beans.get(i).getPageName().split("#");
             if(path.length == 2) {
-                if (!path[0].equals(Constants.nowActivityName.getClass().getSimpleName())) {
+                if (!path[0].equals(Constants.currentActivity.getClass().getSimpleName())) {
                     resenceStock();
                 }
                 //如果当前事件所属的activity与此时正在显示的activity不同，那么休眠0.1秒等待
-                while (!path[0].equals(Constants.nowActivityName.getClass().getSimpleName())) {
+                while (!path[0].equals(Constants.currentActivity.getClass().getSimpleName())) {
                     sleepMills(100);
                 }
                 sleepMills(delay);
@@ -50,13 +50,13 @@ public class ResenceThread extends Thread {
                         downtime = SystemClock.uptimeMillis();
                     }
                     MotionEvent motionEvent = ((TouchEventBean) event).toMotionEvent(downtime == 0 ? SystemClock.uptimeMillis() : downtime);
-                    ViewHelper.handleTouchEventToView(Constants.nowActivityName.getWindow().getDecorView(), motionEvent, path[0], path[1], "");
+                    ViewHelper.handleTouchEventToView(Constants.currentActivity.getWindow().getDecorView(), motionEvent, path[0], path[1], "");
                     if (((TouchEventBean) event).getAction() == MotionEvent.ACTION_UP) {
                         downtime = 0;
                     }
                 }
                 if (event instanceof EditTextEventBean) {
-                    ViewHelper.handleTextEventToView(Constants.nowActivityName.getWindow().getDecorView(), ((EditTextEventBean) event).getTxt(), path[1], "");
+                    ViewHelper.handleTextEventToView(Constants.currentActivity.getWindow().getDecorView(), ((EditTextEventBean) event).getTxt(), path[1], "");
                 }
             }
             i ++;
@@ -75,7 +75,7 @@ public class ResenceThread extends Thread {
     }
 
     public void resenceStock(){
-        Log.v("verf", "****need**" + beans.get(i).getPageName() + "***********复现阻断**************now**" + Constants.nowActivityName.getClass().getSimpleName() + "***");
+        Log.v("verf", "****need**" + beans.get(i).getPageName() + "***********复现阻断**************now**" + Constants.currentActivity.getClass().getSimpleName() + "***");
     }
 
     public void resenceFinish(){

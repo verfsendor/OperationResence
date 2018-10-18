@@ -7,14 +7,36 @@
         android:id="@+id/txt"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:textSize="130dp"
+        android:textSize="20dp"
         android:text="第三个"
         android:gravity="center"/>
-    <!--<FrameLayout-->
-        <!--android:id="@+id/frame"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
+    <Button
+        android:id="@+id/btn_change"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="aaa"/>
+    <FrameLayout
+        android:id="@+id/frame1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <!--</FrameLayout>-->
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frame2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frame3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </FrameLayout>
 
 </LinearLayout>

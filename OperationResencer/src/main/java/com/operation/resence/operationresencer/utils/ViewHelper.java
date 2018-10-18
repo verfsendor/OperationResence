@@ -7,10 +7,11 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.operation.resence.operationresencer.bean.EditTextEventBean;
-import com.operation.resence.operationresencer.listener.AttachListener;
 import com.operation.resence.operationresencer.OperationResencer;
 
 /**
@@ -43,11 +44,17 @@ public class ViewHelper {
             }
             //子view数目为空，添加监听，当加入新子view时，对view进行遍历
             if(((ViewGroup) view).getChildCount() == 0) {
-                view.addOnAttachStateChangeListener(new AttachListener());
+                Log.v("fragmenthook",Constants.focusWindowActivityName + "viewgrop是0，hook继承体系 ");
+//                view.addOnAttachStateChangeListener(new AttachListener());
+                HookHelper.hookOnHierarchyChangeListener((ViewGroup) view);
+//                ((ViewGroup) view).setOnHierarchyChangeListener(new OnHierarchyChangeListenerProxy());
             }
         }else {
             if(view instanceof EditText){
                 addEditTxtChangeListener((EditText)view);
+            }
+            if(view instanceof TextView){
+                Log.v("fragmenthook",view.getTag() + "  " + ((TextView) view).getText());
             }
         }
     }

@@ -20,7 +20,7 @@ public class OperationResencer {
 
     public static void addEvent(BaseEventBean event){
         if(event instanceof TouchEventBean) {
-            Log.v("verf", "add " + event.getPageName() + " " + ((TouchEventBean) event).getRawX() + " "  + ((TouchEventBean) event).getRawY() + " " + ((TouchEventBean) event).getActionTxt() + " " + events.size() );
+            Log.v("verf", "addEvent " + event.getPageName() + " " + ((TouchEventBean) event).getRawX() + " "  + ((TouchEventBean) event).getRawY() + " " + ((TouchEventBean) event).getActionTxt() + " " + events.size() );
         }
         if(events.size() <= Constants.MAX_RECORDS) {
             events.add(event);
@@ -35,7 +35,10 @@ public class OperationResencer {
      * 开始复现
      */
     public static void startResence(){
-       new ResenceThread(events).start();
+        if(events.size() == 0){
+            return;
+        }
+        new ResenceThread(events).start();
     }
 
     public static void resenceFinish(){

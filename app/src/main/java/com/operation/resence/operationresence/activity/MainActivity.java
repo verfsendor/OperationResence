@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.txt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, PopwindowActivity.class));
+                startActivity(new Intent(MainActivity.this, FragmentTestActivity.class));
             }
         });
         findViewById(R.id.txt).setOnTouchListener(new View.OnTouchListener() {
@@ -32,32 +32,23 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
-
-
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.v("verf","onResume size " + OperationResencer.events.size());
-        if(OperationResencer.events.size() > 0){
-            OperationResencer.startResence();
-        }
+        OperationResencer.startResence();
     }
 
     @Override
-    protected void onStop() {
-        Log.v("verf","mainactivity onstop");
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
+        Log.v("fragmenthook","Mainactivity onPause " );
     }
+
     @Override
-    protected void onDestroy() {
-        Log.v("verf","mainactivity onDestroy");
-        super.onDestroy();
-    }
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        return super.dispatchTouchEvent(ev);
+    public void onWindowFocusChanged(boolean hasFocus) {
+        Log.v("fragmenthook","Mainactivity onWindowFocusChanged " + hasFocus);
+        super.onWindowFocusChanged(hasFocus);
     }
 }

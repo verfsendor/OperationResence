@@ -25,6 +25,7 @@ public class PopwindowActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.v("popwindowing","mainactivity onCreate");
         setContentView(R.layout.activity_second);
         findViewById(R.id.btn_show_pop).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,15 +73,20 @@ public class PopwindowActivity extends AppCompatActivity {
         builder.show();
     }
 
+    @Override
+    protected void onPause() {
+        Log.v("popwindowing","mainactivity onPause");
+        super.onPause();
+    }
 
     @Override
     protected void onStop() {
-        Log.v("verf","mainactivity onstop");
+        Log.v("popwindowing","mainactivity onstop");
         super.onStop();
     }
     @Override
     protected void onDestroy() {
-        Log.v("verf","mainactivity onDestroy");
+        Log.v("popwindowing","mainactivity onDestroy");
         super.onDestroy();
     }
 }

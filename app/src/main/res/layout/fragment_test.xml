@@ -10,10 +10,18 @@
         android:textSize="30dp"
         android:text="测试放fragment"
         android:gravity="center"/>
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="sksjgk"
-        android:background="#fff876"/>
+        android:textSize="30dp"
+        android:text="测试放fragment000"
+        android:gravity="center"/>
+
+    <!--<EditText-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:text="sksjgk"-->
+        <!--android:gravity="center"-->
+        <!--android:background="#fff876"/>-->
 
 </LinearLayout>

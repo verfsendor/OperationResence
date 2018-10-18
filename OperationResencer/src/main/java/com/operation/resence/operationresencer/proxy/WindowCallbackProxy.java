@@ -94,7 +94,7 @@ public class WindowCallbackProxy implements Window.Callback {
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
-        Constants.focusWindowActivityName = Constants.nowActivityName.getClass().getSimpleName();
+        Constants.focusWindowActivityName = Constants.currentActivity.getClass().getSimpleName();
         Constants.hasFocus = hasFocus;
         HookHelper.hookWindowManagerGlobal();
         callback.onWindowFocusChanged(hasFocus);
